@@ -7,12 +7,15 @@ from django.dispatch import receiver
 class DriverProfile(models.Model):
     """Driver's Profile"""
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    vehicle_number = models.CharField(max_length=20)
+    real_name = models.CharField(max_length=255)
+    vehicle_type = models.CharField(max_length=255)
+    license_plate_number = models.CharField(max_length=20)
+    maximum_passengers = models.IntegerField()
     special_vehicle_info = models.TextField(blank=True)
     is_driver = models.BooleanField(default=False)
-
+    
     def __str__(self):
-        return f'{self.user.first_name} {self.user.last_name}\'s Profile'
+        return f'{self.real_name}\'s Driver Profile'
 
 
 @receiver(post_save, sender=User)
