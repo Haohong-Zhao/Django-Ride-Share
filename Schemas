@@ -1,0 +1,18 @@
+# Driver Info Schema
+vehicle_type -- CharField(max_length=255)
+license_plate_number -- CharField(max_length=255)
+maximum_passengers -- IntegerField
+special_vehicle_info -- TextField
+
+# Ride Schema
+owner -- ForeignKey(*user, on_delete=CASCADE)
+destination -- CharField(max_length=1023)
+required_arrival_time -- DateTimeField
+number_of_passengers -- IntegerField
+
+requested_vehicle_type -- CharField(max_length=255, blank=True)
+special_request -- TextField(blank=True)
+
+ride_status -- CharField(max_length=255)
+can_be_shared -- BooleanField(default=False)
+ride_sharers -- ManyToMany(*user, on_delete=CASCADE)
