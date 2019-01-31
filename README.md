@@ -6,13 +6,13 @@ Objective
 The objective of the project is to design and deploy a taxi ride-sharing app using the Django Web framework.
 
 Technologies used : 
+
 - **HTML5**
 - **CSS3**
 - **Django**
 - **PostgreSQL**
-- **Django REST-API**
 - **JavaScript** 
-- **Bootstrap4**
+- **Bootstrap**
                   
 Developers
 ----------
