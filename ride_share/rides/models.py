@@ -16,7 +16,7 @@ class Ride(models.Model):
 
     destination = models.CharField(max_length=1023)
     required_arrival_time = models.DateTimeField()
-    passenger_number_from_onwer = models.IntegerField()
+    passenger_number_from_owner = models.IntegerField()
     ride_status = models.CharField(max_length=255, default='open')
 
     requested_vehicle_type = models.CharField(max_length=255, blank=True)
@@ -24,7 +24,7 @@ class Ride(models.Model):
     
     can_be_shared = models.BooleanField(default=False)
     sharers = models.ManyToManyField(User, related_name='rides_as_sharer')
-    sharer_id_and_passenger_number_pair = JSONField()
+    sharer_id_and_passenger_number_pair = JSONField(null=True)
 
     def __str__(self):
         return f'{self.owner.first_name} {self.owner.last_name}'

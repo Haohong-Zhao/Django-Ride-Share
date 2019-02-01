@@ -42,3 +42,10 @@ def is_driver(request):
     return get_driver_profile_by_request(request).is_driver
 
 
+def get_checkbox_input(input_name, request):
+    """Get bootstrap checkbox input from a POST request"""
+    if request.POST.get(input_name):
+        return True
+    else:
+        return False
+
