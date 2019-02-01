@@ -5,10 +5,13 @@ from django.contrib.postgres.fields import JSONField
 class Ride(models.Model):
     """Ride model"""
     owner = models.ForeignKey(
-        User, related_name='rides_as_owner', on_delete=models.CASCADE
+        User, related_name='rides_as_owner', 
+        on_delete=models.CASCADE
     )
     driver = models.ForeignKey(
-        User, related_name='rides_as_driver',  on_delete=models.DO_NOTHING
+        User, related_name='rides_as_driver',  
+        on_delete=models.DO_NOTHING,
+        null=True, blank=True,
     )
 
     destination = models.CharField(max_length=1023)
@@ -24,6 +27,6 @@ class Ride(models.Model):
     sharer_id_and_passenger_number_pair = JSONField()
 
     def __str__(self):
-        return f'{self.onwer.first_name} {self.owner.last_name}'
+        return f'{self.owner.first_name} {self.owner.last_name}'
 
 

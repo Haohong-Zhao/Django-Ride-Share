@@ -6,7 +6,7 @@ from django.dispatch import receiver
 
 class DriverProfile(models.Model):
     """Driver's Profile"""
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, related_name='driverProfile', on_delete=models.CASCADE)
     real_name = models.CharField(max_length=255, default='')
     vehicle_type = models.CharField(max_length=255, default='')
     license_plate_number = models.CharField(max_length=20, default='')

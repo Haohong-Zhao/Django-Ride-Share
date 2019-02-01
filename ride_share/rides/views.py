@@ -12,9 +12,9 @@ def rides(request):
         return HttpResponse(status=401)
     
     user = User.objects.get(id=request.user.id)
-    rides_as_owner = user.rides_as_owner.objects.all().order_by('destination')
-    rides_as_driver = user.rides_as_driver.objects.all().order_by('destination')
-    rides_as_sharer = user.rides_as_sharer.objects.all().order_by('destination')
+    rides_as_owner = user.rides_as_owner.all().order_by('destination')
+    rides_as_driver = user.rides_as_driver.all().order_by('destination')
+    rides_as_sharer = user.rides_as_sharer.all().order_by('destination')
 
     context = {
         'rides_as_owner': rides_as_owner,
