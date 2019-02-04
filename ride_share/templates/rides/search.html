@@ -2,4 +2,44 @@
 
 {% block content %}
 <h1>Search</h1>
+{% if user.driverProfile.is_driver %}
+<form method="POST" action="{% url 'search_ride' %}">
+    {% csrf_token %}
+    <input type="hidden" name="search_as" value="driver">
+    <button type="submit" class="btn btn-primary col-md-12">Search as a driver</button>
+</form>
+{% endif %}
+<form method="POST" action="{% url 'search_ride' %}">
+    {% csrf_token %}
+    <input type="hidden" name="search_as" value="sharer">
+    <div class="form-group col-md-4">
+        <label for="destination">Destination address</label>
+        <input type="text" class="form-control" name="destination" id="destination" placeholder="Address" required>
+    </div>
+    <div class="form-group col-md-2">
+        <label for="number_of_passengers">Number of passengers</label>
+        <input type="number" class="form-control" name="number_of_passengers" id="number_of_passengers" placeholder="Number of passengers"
+            required>
+    </div>
+    <div class="form-group col-md-3">
+        <label for="earliest_arrival_time">Earliest arrival time</label>
+        <input type="text" class="form-control" name="earliest_arrival_time" id="earliest_arrival_time" placeholder="format: Jan. 1, 2019, 12:30 p.m."
+            required>
+    </div>
+    <div class="form-group col-md-3">
+        <label for="latest_arrival_time">Latest arrival time</label>
+        <input type="text" class="form-control" name="latest_arrival_time" id="latest_arrival_time" placeholder="format: Jan. 1, 2019, 12:30 p.m."
+            required>
+    </div>
+    <div class="form-group col-md-4">
+        <label for="vehicle_type">Vehicle type</label>
+        <input type="text" class="form-control" name="vehicle_type" id="vehicle_type" placeholder="Vehicle type">
+    </div>
+    <div class="form-group col-md-4">
+        <label for="special_request">Special request</label>
+        <textarea type="text" class="form-control" name="special_request" id="special_request" placeholder="Special request"
+            rows="3"></textarea>
+    </div>
+    <button type="submit" class="btn btn-secondary col-md-12">Search as a sharer</button>
+</form>
 {% endblock %}

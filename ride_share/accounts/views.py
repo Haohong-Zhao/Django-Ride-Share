@@ -42,6 +42,12 @@ def register(request):
 
 
 def login(request):
+    if request.method == 'GET':
+        if request.user.is_authenticated:
+            return redirect('dashboard')
+        else:
+            return render(request, 'accounts/login.html')
+
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -56,12 +62,6 @@ def login(request):
         else:
             messages.error(request, 'Invalid credential')
             return redirect('login')
-    else:
-        if request.user.is_authenticated:
-            return redirect('dashboard')
-        else:
-            return render(request, 'accounts/login.html')
-
 
 
 def logout(request):
@@ -76,62 +76,64 @@ def dashboard(request):
 
 
 def driver_register(request):
-    # For post method
-    if request.method == 'POST':
-        if not request.user.is_authenticated:
-            return HttpResponse(status=401)
-        else:
-            vehicle_number = request.POST['vehicle_number']
-            special_vehicle_info = request.POST['special_vehicle_info']
-            
-            driver_profile = get_driver_profile_by_request(request)
-
-            driver_profile.vehicle_number = vehicle_number
-            driver_profile.special_vehicle_info = special_vehicle_info
-            driver_profile.save(update_fields=[
-                'vehicle_number', 'special_vehicle_info'
-            ])
-            messages.success(request, 'Congratulate on being a driver.')
-            return redirect('dashboard')
-
-    # For Get Method
     if not request.user.is_authenticated:
-        messages.error(request, 'Log in is required for driver registration.')
-        return redirect('login')
-    else:
-        if is_driver(request):
-            messages.error(request, 'You are already a driver.')
-            return redirect('dashboard')
-        else:
-            return render(request, 'accounts/driver_register.html')
+        return HttpResponse(status=401)
+    if request.user.driverProfile.is_driver:
+        messages.error(request, 'You are already a driver.')
+        return redirect('dashboard')
+    # Get
+    if request.method == 'GET':
+        return render(request, 'accounts/driver_register.html')
+    # POST
+    if request.method == 'POST':
+        real_name = request.POST['real_name']
+        vehicle_type = request.POST['vehicle_type']
+        license_plate_number = request.POST['license_plate_number']
+        maximum_passengers = int(request.POST['maximum_passengers'])
+        special_vehicle_info = request.POST['special_vehicle_info']
+
+        driver_profile = request.user.driverProfile
+        
+        driver_profile.real_name = real_name
+        driver_profile.vehicle_type = vehicle_type
+        driver_profile.license_plate_number = license_plate_number
+        driver_profile.maximum_passengers = maximum_passengers
+        driver_profile.special_vehicle_info = special_vehicle_info
+        driver_profile.is_driver = True
+        driver_profile.save()
+
+        messages.success(request, 'Congratulate on being a driver.')
+        return redirect('dashboard')
 
 
 def driver_update_info(request):
-    # For post method
-    if request.method == 'POST':
-        if not request.user.is_authenticated:
-            return HttpResponse(status=401)
-        else:
-            vehicle_number = request.POST['vehicle_number']
-            special_vehicle_info = request.POST['special_vehicle_info']
-
-            driver_profile = get_driver_profile_by_request(request)
-
-            driver_profile.vehicle_number = vehicle_number
-            driver_profile.special_vehicle_info = special_vehicle_info
-            driver_profile.save(update_fields=[
-                'vehicle_number', 'special_vehicle_info'
-            ])
-            messages.success(request, 'Update driver\'s info successfully.')
-            return redirect('dashboard')
-
-    # For Get Method
     if not request.user.is_authenticated:
-        messages.error(request, 'Log in is required for driver registration.')
-        return redirect('login')
-    else:
-        if not is_driver(request):
-            messages.error(request, 'You are not a driver.')
-            return redirect('driver_register')
-        else:
-            return render(request, 'accounts/driver_update_info.html')
+        return HttpResponse(status=401)
+    if not request.user.driverProfile.is_driver:
+        messages.error(request, 'You are not a driver.')
+        return redirect('dashboard')
+    # GET
+    if request.method == 'GET':
+        context = {
+            'driver_profile': request.user.driverProfile
+        }
+        return render(request, 'accounts/driver_update_info.html', context)
+    # POST
+    if request.method == 'POST':
+        real_name = request.POST['real_name']
+        vehicle_type = request.POST['vehicle_type']
+        license_plate_number = request.POST['license_plate_number']
+        maximum_passengers = int(request.POST['maximum_passengers'])
+        special_vehicle_info = request.POST['special_vehicle_info']
+
+        driver_profile = request.user.driverProfile
+
+        driver_profile.real_name = real_name
+        driver_profile.vehicle_type = vehicle_type
+        driver_profile.license_plate_number = license_plate_number
+        driver_profile.maximum_passengers = maximum_passengers
+        driver_profile.special_vehicle_info = special_vehicle_info
+        driver_profile.save()
+
+        messages.success(request, 'Update driver\'s info successfully.')
+        return redirect('dashboard')

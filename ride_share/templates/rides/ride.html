@@ -1,42 +1,102 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Edit your request</h1>
-<form method="POST" action="{% url 'create_ride' %}">
-    {% csrf_token %}
-    <div class="form-row">
-        <div class="form-group col-md-4">
-            <label for="destination">Destination address</label>
-            <input type="text" class="form-control" name="destination" id="destination" placeholder="Address">
-        </div>
-        <div class="form-group col-md-2">
-            <label for="arrival_time">Required arrival time</label>
-            <input type="text" class="form-control" name="arrival_time" id="arrival_time" placeholder="Required Arrival Time">
-        </div>
-        <div class="form-group col-md-2">
-            <label for="number_of_passengers">Number of passengers</label>
-            <input type="number" class="form-control" name="number_of_passengers" id="number_of_passengers" placeholder="Number of passengers">
-        </div>
-        <div class="form-group col-md-2">
-            <label for="can_be_shared"></label>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="can_be_shared" id="can_be_shared">
-                <label class="form-check-label" for="can_be_shared">
-                    can be shared
-                </label>
-            </div>
-        </div>
-    </div>
-    <div class="form-group col-md-4">
-        <label for="vehicle_type">Vehicle type</label>
-        <input type="text" class="form-control" name="vehicle_type" id="vehicle_type" placeholder="Vehicle type">
-    </div>
-    <div class="form-group col-md-4">
-        <label for="special_request">Special request</label>
-        <textarea type="text" class="form-control" name="special_request" id="special_request" placeholder="Special request"
-            rows="3"></textarea>
-    </div>
-    <button type="submit" class="btn btn-primary col-md-12">Make a request</button>
-</form>
+<h1>Ride detail</h1>
+
+{% if ride %}
+<a href="{% url 'edit_ride' ride.id %}" class="btn btn-success" role="button">Edit the ride</a>
+<h5>Info table 1</h5>
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">id</th>
+            <th scope="col">owner</th>
+            <th scope="col">destination</th>
+            <th scope="col">required arrival time</th>
+            <th scope="col">passengers from owner</th>
+            <th scope="col">passengers in total </th>
+            <th scope="col">status</th>
+            <th scope="col">can be shared</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">{{ ride.id }}</th>
+            <td>{{ ride.owner.username }}</td>
+            <td>{{ ride.destination }}</td>
+            <td>{{ ride.required_arrival_time }}</td>
+            <td>{{ ride.passenger_number_from_owner }}</td>
+            <td>{{ ride.passenger_number_in_total }}</td>
+            <td>{{ ride.ride_status }}</td>
+            <td>{{ ride.can_be_shared }}</td>
+        </tr>
+    </tbody>
+</table>
+<h5>Info table 2</h5>
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">requested vehicle type</th>
+            <th scope="col">special request</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ ride.requested_vehicle_type }}</td>
+            <td>{{ ride.special_request }}</td>
+        </tr>
+    </tbody>
+</table>
+<h5>Info table 3</h5>
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">driver</th>
+            <th scope="col">driver's vehicle type</th>
+            <th scope="col">vehicle maximum passengers</th>
+            <th scope="col">license plate number</th>
+            <th scope="col">driver's vehicle info</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            {% if ride.driver %}
+            <td>{{ ride.driver.driverProfile.real_name }}</td>
+            <td>{{ ride.driver.driverProfile.vehicle_type }}</td>
+            <td>{{ ride.driver.driverProfile.maximum_passengers }}</td>
+            <td>{{ ride.driver.driverProfile.license_plate_number }}</td>
+            <td>{{ ride.driver.driverProfile.special_vehicle_info }}</td>
+            {% else %}
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            {% endif %}
+        </tr>
+    </tbody>
+</table>
+<h5>Info table 4</h5>
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">sharer</th>
+            <th scope="col">passengers in sharer's group</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            {% if ride.sharer_id_and_passenger_number_pair %}
+                {% for key, value in ride.sharer_id_and_passenger_number_pair.items %}
+                <td>{{ value.username }}</td>
+                <td>{{ value.number_of_passengers }}</td>
+                {% endfor %}
+            {% endif %}
+        </tr>
+    </tbody>
+</table>
+{% else %}
+<p>You don't have anything to display here</p>
+{% endif %}
 
 {% endblock %}

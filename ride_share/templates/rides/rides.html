@@ -2,7 +2,7 @@
 
 {% block content %}
 <a href="{% url 'create_ride' %}" class="btn btn-info" role="button">Request a Ride</a>
-
+<a href="{% url 'search_ride' %}" class="btn btn-success" role="button">Search</a>
 <h1>Rides as Owner</h1>
 {% if rides_as_owner %}
     <table class="table">
@@ -108,7 +108,15 @@
                     {% endif %}
                 </td>
                 <td>{{ ride.ride_status }}</td>
-                <td><a href="{% url 'edit_ride' ride.id %}" class="btn btn-secondary" role="button">Edit</a></td>
+                {% if ride.ride_status == 'confirm' %}
+                <td>
+                    <form method="POST" action="{% url 'complete_ride' ride.id %}">
+                        {% csrf_token %}
+                        <input type="hidden" />
+                        <input type="submit" class="btn btn-secondary" value="Complete" />
+                    </form>
+                </td>
+                {% endif %}
             </tr>
             {% endfor %}
         </tbody>

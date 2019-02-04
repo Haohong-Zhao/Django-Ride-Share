@@ -2,4 +2,9 @@
 
 {% block content %}
 <h1>dashboard</h1>
+{% if not user.driverProfile.is_driver %}
+<a href="{% url 'driver_register' %}" class="btn btn-info" role="button">Driver register</a>
+{% else %}
+<a href="{% url 'driver_update_info' %}" class="btn btn-info" role="button">Update driver profile</a>
+{% endif %}
 {% endblock %}
