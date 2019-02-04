@@ -85,14 +85,14 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-            {% if ride.sharer_id_and_passenger_number_pair %}
-                {% for key, value in ride.sharer_id_and_passenger_number_pair.items %}
-                <td>{{ value.username }}</td>
-                <td>{{ value.number_of_passengers }}</td>
-                {% endfor %}
-            {% endif %}
-        </tr>
+        {% if ride.sharer_id_and_passenger_number_pair %}
+            {% for key, value in ride.sharer_id_and_passenger_number_pair.items %}
+                <tr>
+                    <td>{{ value.username }}</td>
+                    <td>{{ value.number_of_passengers }}</td>
+                </tr>
+            {% endfor %}
+        {% endif %}
     </tbody>
 </table>
 {% else %}

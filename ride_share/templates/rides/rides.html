@@ -8,7 +8,6 @@
     <table class="table">
         <thead class="thead-dark">
             <tr>
-                <th scope="col">#</th>
                 <th scope="col">id</th>
                 <th scope="col">owner</th>
                 <th scope="col">destination</th>
@@ -21,8 +20,7 @@
         <tbody>
                 {% for ride in rides_as_owner %}
                     <tr>
-                        <th scope="row">1</th>
-                        <td>{{ ride.id }}</td>
+                        <th scope="row">{{ ride.id }}</th>
                         <td>{{ ride.owner.username }}</td>
                         <td>{{ ride.destination }}</td>
                         <td>{{ ride.required_arrival_time }}</td>
@@ -32,7 +30,10 @@
                             {% endif %}
                         </td>
                         <td>{{ ride.ride_status }}</td>
-                        <td><a href="{% url 'edit_ride' ride.id %}" class="btn btn-secondary" role="button">Edit</a></td>
+                        <td>
+                            <a href="{% url 'ride' ride.id %}" class="btn btn-info" role="button">View</a>
+                            <a href="{% url 'edit_ride' ride.id %}" class="btn btn-secondary" role="button">Edit</a>
+                        </td>
                     </tr>
                 {% endfor %}
         </tbody>
@@ -46,7 +47,6 @@
     <table class="table">
         <thead class="thead-light">
             <tr>
-                <th scope="col">#</th>
                 <th scope="col">id</th>
                 <th scope="col">owner</th>
                 <th scope="col">destination</th>
@@ -59,8 +59,7 @@
         <tbody>
             {% for ride in rides_as_sharer %}
             <tr>
-                <th scope="row">1</th>
-                <td>{{ ride.id }}</td>
+                <th scope="row">{{ ride.id }}</th>
                 <td>{{ ride.owner.username }}</td>
                 <td>{{ ride.destination }}</td>
                 <td>{{ ride.required_arrival_time }}</td>
@@ -70,7 +69,10 @@
                     {% endif %}
                 </td>
                 <td>{{ ride.ride_status }}</td>
-                <td><a href="{% url 'edit_ride' ride.id %}" class="btn btn-secondary" role="button">Edit</a></td>
+                <td>
+                    <a href="{% url 'ride' ride.id %}" class="btn btn-info" role="button">View</a>
+                    <a href="{% url 'edit_ride' ride.id %}" class="btn btn-secondary" role="button">Edit</a>
+                </td>
             </tr>
             {% endfor %}
         </tbody>
@@ -84,7 +86,6 @@
     <table class="table">
         <thead class="thead-dark">
             <tr>
-                <th scope="col">#</th>
                 <th scope="col">id</th>
                 <th scope="col">owner</th>
                 <th scope="col">destination</th>
@@ -97,8 +98,7 @@
         <tbody>
             {% for ride in rides_as_driver %}
             <tr>
-                <th scope="row">1</th>
-                <td>{{ ride.id }}</td>
+                <th scope="row">{{ ride.id }}</th>
                 <td>{{ ride.owner.username }}</td>
                 <td>{{ ride.destination }}</td>
                 <td>{{ ride.required_arrival_time }}</td>
@@ -110,6 +110,7 @@
                 <td>{{ ride.ride_status }}</td>
                 {% if ride.ride_status == 'confirm' %}
                 <td>
+                    <a href="{% url 'ride' ride.id %}" class="btn btn-info" role="button">View</a>
                     <form method="POST" action="{% url 'complete_ride' ride.id %}">
                         {% csrf_token %}
                         <input type="hidden" />

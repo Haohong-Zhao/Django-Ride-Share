@@ -2,6 +2,9 @@
 
 {% block content %}
 <h1>dashboard</h1>
+<!-- Alerts -->
+{% include 'partials/_alerts.html' %}
+
 {% if not user.driverProfile.is_driver %}
 <a href="{% url 'driver_register' %}" class="btn btn-info" role="button">Driver register</a>
 {% else %}

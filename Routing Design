@@ -3,11 +3,12 @@ register
 login
 logout
 dashboard (View User Info as a USER AND a DRIVER)
+
 ride-list (list all rides related as a USER ROLE: aka. Owned rides and Shared rides, BUT IN DIFFERENT block)
 ride-detail
 create ride request AS A USER
 edit ride request AS AN OWNER
-edit ride request AS AN OWNER
+edit ride request AS AN SHARER
 search AS A SHARER
 
 
@@ -15,6 +16,7 @@ search AS A SHARER
 register
 update
 (dashboard: same as User)
+
 ride-list (list all rides as a DRIVER ROLE)
 ride-detail
 edit ride request AS A DRIVER

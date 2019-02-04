@@ -91,7 +91,7 @@ def search(request):
         # search as a sharer
         else:
             destination = request.POST['destination']
-            number_of_passengers = request.POST['number_of_passengers']
+            number_of_passengers = int(request.POST['number_of_passengers'])
             earliest_arrival_time = str_to_datetime(
                 request.POST['earliest_arrival_time']
             )
@@ -102,6 +102,7 @@ def search(request):
             rides = Ride.objects.order_by('-id').filter(
                 Q(ride_status='open'),
                 Q(can_be_shared=True),
+                Q(passenger_number_in_total__lte=number_of_passengers),
                 Q(destination=destination),
                 Q(required_arrival_time__gte=earliest_arrival_time) & Q(
                     required_arrival_time__lte=latest_arrival_time)
@@ -167,7 +168,7 @@ def edit(request, ride_id):
         }
         return render(request, 'rides/edit.html', context)
     # POST: Update ride information(for owner only), driver and sharer user different methods below
-    if request.method == 'POST' and user_role == 'owner':
+    if request.method == 'POST' and user_role == 'owner' and ride.ride_status == 'open':
         # get form inputs
         destination = request.POST['destination']
         required_arrival_time = str_to_datetime(
@@ -249,7 +250,12 @@ def share(request, ride_id):
     new_number_of_passengers = int(request.POST['number_of_passengers'])
     if user not in ride.sharers.all():
         ride.sharers.add(user)
-    record = ride.sharer_id_and_passenger_number_pair.get(user.id)
+
+    # bug fix: object is null when init, object.get is not supported
+    if not ride.sharer_id_and_passenger_number_pair:
+        ride.sharer_id_and_passenger_number_pair = {}
+    # bug fix: dictionary key should always be string
+    record = ride.sharer_id_and_passenger_number_pair.get(str(user.id))
     old_number_of_passengers = record['number_of_passengers'] if record else 0
     ride.passenger_number_in_total += (
         new_number_of_passengers - old_number_of_passengers

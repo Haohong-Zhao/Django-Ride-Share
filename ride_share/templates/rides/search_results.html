@@ -63,7 +63,9 @@
             <td>{{ ride.required_arrival_time }}</td>
             <td>{{ ride.passenger_number_in_total }}</td>
             <td>{{ ride.ride_status }}</td>
-            <td><a href="{% url 'edit_ride' ride.id %}" class="btn btn-secondary" role="button">share the ride</a></td>
+            <td>
+                <a href="{% url 'edit_ride' ride.id %}" class="btn btn-secondary" role="button">share the ride</a>
+            </td>
         </tr>
         {% endfor %}
     </tbody>
