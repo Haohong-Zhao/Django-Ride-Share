@@ -1,22 +1,24 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Ride detail</h1>
+<h1> <center style = "color: darkblue;"> Ride detail </center></h1>
 
 {% if ride %}
-<a href="{% url 'edit_ride' ride.id %}" class="btn btn-success" role="button">Edit the ride</a>
-<h5>Info table 1</h5>
-<table class="table">
+<center><a href="{% url 'edit_ride' ride.id %}" class="btn btn-success" role="button">Edit the ride</a> </center>
+<br>
+<div style = "margin: 0px 0px 30px 30px;">
+<h5><center>Information Table I</center></h5>
+<table class="table" style ="margin: 0px 10px 0px 15px; border: 5px solid black; width: 95%";>
     <thead class="thead-dark">
         <tr>
-            <th scope="col">id</th>
-            <th scope="col">owner</th>
-            <th scope="col">destination</th>
-            <th scope="col">required arrival time</th>
-            <th scope="col">passengers from owner</th>
-            <th scope="col">passengers in total </th>
-            <th scope="col">status</th>
-            <th scope="col">can be shared</th>
+            <th scope="col">ID</th>
+            <th scope="col">Owner</th>
+            <th scope="col">Destination</th>
+            <th scope="col">Required Arrival Time</th>
+            <th scope="col">Passengers with Owner</th>
+            <th scope="col">Total Passengers</th>
+            <th scope="col">Status</th>
+            <th scope="col">Can be shared</th>
         </tr>
     </thead>
     <tbody>
@@ -32,8 +34,9 @@
         </tr>
     </tbody>
 </table>
-<h5>Info table 2</h5>
-<table class="table">
+<br>
+<h5><center>Information Table II</center></h5>
+<table class="table" style ="margin: 0px 10px 0px 15px; border: 5px solid black; width: 95%";>
     <thead class="thead-dark">
         <tr>
             <th scope="col">requested vehicle type</th>
@@ -47,15 +50,16 @@
         </tr>
     </tbody>
 </table>
-<h5>Info table 3</h5>
-<table class="table">
+<br>
+<h5><center>Information Table III</center></h5>
+<table class="table" style ="margin: 0px 10px 0px 15px; border: 5px solid black; width: 95%";>
     <thead class="thead-dark">
         <tr>
-            <th scope="col">driver</th>
-            <th scope="col">driver's vehicle type</th>
-            <th scope="col">vehicle maximum passengers</th>
-            <th scope="col">license plate number</th>
-            <th scope="col">driver's vehicle info</th>
+            <th scope="col">Driver</th>
+            <th scope="col">Vehicle Type</th>
+            <th scope="col">Passenger Capacity</th>
+            <th scope="col">License Number</th>
+            <th scope="col">Vehicle Info</th>
         </tr>
     </thead>
     <tbody>
@@ -76,12 +80,13 @@
         </tr>
     </tbody>
 </table>
-<h5>Info table 4</h5>
-<table class="table">
+<br>
+<h5><center>Information Table IV</center></h5>
+<table class="table" style ="margin: 0px 10px 0px 15px; border: 5px solid black; width: 95%";>
     <thead class="thead-dark">
         <tr>
-            <th scope="col">sharer</th>
-            <th scope="col">passengers in sharer's group</th>
+            <th scope="col">Sharer</th>
+            <th scope="col">Passengers with Sharer</th>
         </tr>
     </thead>
     <tbody>
@@ -98,5 +103,5 @@
 {% else %}
 <p>You don't have anything to display here</p>
 {% endif %}
-
+</div>
 {% endblock %}
