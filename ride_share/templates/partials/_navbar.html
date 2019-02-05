@@ -25,6 +25,7 @@
                 >
                     <a class="nav-link" href="{% url 'about' %}">About</a>
                 </li>
+                {% if user.is_authenticated %}
                 <li 
                 {% if "rides" in request.path %}
                     class="nav-item active mr-3"
@@ -34,6 +35,7 @@
                 >
                     <a class="nav-link" href="{% url 'rides' %}">Rides</a>
                 </li>
+                {% endif %}
             </ul>
 
             <ul class="navbar-nav ml-auto">
