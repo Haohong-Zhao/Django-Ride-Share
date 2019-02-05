@@ -1,20 +1,28 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<a href="{% url 'create_ride' %}" class="btn btn-info" role="button">Request a Ride</a>
-<a href="{% url 'search_ride' %}" class="btn btn-success" role="button">Search</a>
-<h1>Rides as Owner</h1>
+
+<div>
+<a href="{% url 'create_ride' %}" class="btn btn-info" role="button" style="margin: 20px 25px 5px 625px;">Request a Ride </a>
+</div>
+<br>
+<div>
+<a href="{% url 'search_ride' %}" class="btn btn-primary" role="button" style="margin: 0px 25px 5px 620px;"> Search for Rides</a>
+</div>
+<br>
+<div style="margin: 0px 0px 10px 30px">
+<h2>Rides as Owner</h2>
 {% if rides_as_owner %}
     <table class="table">
         <thead class="thead-dark">
             <tr>
-                <th scope="col">id</th>
-                <th scope="col">owner</th>
-                <th scope="col">destination</th>
-                <th scope="col">required arrival time</th>
-                <th scope="col">driver</th>
-                <th scope="col">status</th>
-                <th scope="col">action</th>
+                <th scope="col">Id</th>
+                <th scope="col">Owner</th>
+                <th scope="col">Destination</th>
+                <th scope="col">Required Arrival Time</th>
+                <th scope="col">Driver</th>
+                <th scope="col">Status</th>
+                <th scope="col">Action</th>
             </tr>
         </thead>
         <tbody>
@@ -39,21 +47,21 @@
         </tbody>
     </table>
 {% else %}
-    <p>You don't have anything to display here</p>
+    <p>Nothing to display here</p>
 {% endif %}
 
-<h1>Rides as Sharer</h1>
+<h2>Rides as Sharer</h2>
 {% if rides_as_sharer %}
     <table class="table">
         <thead class="thead-light">
             <tr>
-                <th scope="col">id</th>
-                <th scope="col">owner</th>
-                <th scope="col">destination</th>
-                <th scope="col">required arrival time</th>
-                <th scope="col">driver</th>
-                <th scope="col">status</th>
-                <th scope="col">action</th>
+                <th scope="col">Id</th>
+                <th scope="col">Owner</th>
+                <th scope="col">Destination</th>
+                <th scope="col">Required Arrival Time</th>
+                <th scope="col">Driver</th>
+                <th scope="col">Status</th>
+                <th scope="col">Action</th>
             </tr>
         </thead>
         <tbody>
@@ -78,21 +86,21 @@
         </tbody>
     </table>
 {% else %}
-    <p>You don't have anything to display here</p>
+    <p>Nothing to display here</p>
 {% endif %}
 
-<h1>Rides as Driver</h1>
+<h2>Rides as Driver</h2>
 {% if rides_as_driver %}
     <table class="table">
         <thead class="thead-dark">
             <tr>
-                <th scope="col">id</th>
-                <th scope="col">owner</th>
-                <th scope="col">destination</th>
-                <th scope="col">required arrival time</th>
-                <th scope="col">driver</th>
-                <th scope="col">status</th>
-                <th scope="col">action</th>
+                <th scope="col">ID</th>
+                <th scope="col">Owner</th>
+                <th scope="col">Destination</th>
+                <th scope="col">Required Arrival Time</th>
+                <th scope="col">Driver</th>
+                <th scope="col">Status</th>
+                <th scope="col">Action</th>
             </tr>
         </thead>
         <tbody>
@@ -123,7 +131,8 @@
         </tbody>
     </table>
 {% else %}
-    <p>You don't have anything to display here</p>
+    <p>Nothing to display here</p>
 {% endif %}
+</div>
 
 {% endblock %}
