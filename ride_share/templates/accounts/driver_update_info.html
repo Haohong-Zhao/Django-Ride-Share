@@ -19,23 +19,23 @@
                             <!-- prevent cross-site forgery -->
                             {% csrf_token %}
                             <div class="form-group">
-                                <label for="real_name">Real name</label>
+                                <label for="real_name"><font color = "red">Full Name</font></label>
                                 <input type="text" name="real_name" class="form-control" value="{{ user.driverProfile.real_name }}" required>
                             </div>
                             <div class="form-group">
-                                <label for="vehicle_type">Vehicle type</label>
+                                <label for="vehicle_type"><font color = "red">Vehicle Type</font></label>
                                 <input type="text" name="vehicle_type" class="form-control" value="{{ user.driverProfile.vehicle_type }}" required>
                             </div>
                             <div class="form-group">
-                                <label for="license_plate_number">License plate number</label>
+                                <label for="license_plate_number"><font color = "red">License Number</font></label>
                                 <input type="text" name="license_plate_number" class="form-control" value="{{ user.driverProfile.license_plate_number }}" required>
                             </div>
                             <div class="form-group">
-                                <label for="maximum_passengers">Maximum passengers</label>
+                                <label for="maximum_passengers"><font color = "red">Passenger Capacity</font></label>
                                 <input type="number" name="maximum_passengers" class="form-control" value="{{ user.driverProfile.maximum_passengers }}" required>
                             </div>
                             <div class="form-group">
-                                <label for="special_vehicle_info">Special Vehicle Info</label>
+                                <label for="special_vehicle_info"><font color = "red">Special Vehicle Info</font></label>
                                 <textarea type="text" name="special_vehicle_info" class="form-control" rows="3">{{ user.driverProfile.special_vehicle_info }}</textarea>
                             </div>
                             <input type="submit" value="Update" class="btn btn-secondary btn-block">

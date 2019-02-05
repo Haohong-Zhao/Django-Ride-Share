@@ -18,27 +18,27 @@
                             <!-- prevent cross-site forgery -->
                             {% csrf_token %}
                             <div class="form-group">
-                                <label for="first_name">First Name</label>
+                                <label for="first_name"><font color="red">First Name</font></label>
                                 <input type="text" name="first_name" class="form-control" required>
                             </div>
                             <div class="form-group">
-                                <label for="last_name">Last Name</label>
+                                <label for="last_name"><font color="red">Last Name </font></label>
                                 <input type="text" name="last_name" class="form-control" required>
                             </div>
                             <div class="form-group">
-                                <label for="username">Username</label>
+                                <label for="username"><font color="red">Username</font></label>
                                 <input type="text" name="username" class="form-control" required>
                             </div>
                             <div class="form-group">
-                                <label for="email">Email</label>
+                                <label for="email"><font color="red">Email</font></label>
                                 <input type="email" name="email" class="form-control" required>
                             </div>
                             <div class="form-group">
-                                <label for="password2">Password</label>
+                                <label for="password2"><font color="red">Password</font></label>
                                 <input type="password" name="password" class="form-control" required>
                             </div>
                             <div class="form-group">
-                                <label for="password">Confirm Password</label>
+                                <label for="password"><font color="red">Confirm Password</font></label>
                                 <input type="password" name="password2" class="form-control" required>
                             </div>
                             <input type="submit" value="Register" class="btn btn-secondary btn-block">

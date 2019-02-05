@@ -1,13 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>dashboard</h1>
+<h1 style = "text-align:center;"> User Dashboard </h1>
 <!-- Alerts -->
 {% include 'partials/_alerts.html' %}
 
 {% if not user.driverProfile.is_driver %}
-<a href="{% url 'driver_register' %}" class="btn btn-info" role="button">Driver register</a>
+<a href="{% url 'driver_register' %}" class="btn btn-info" role="button" style="margin-left: 625px ;">Register as a driver </a>
+
 {% else %}
-<a href="{% url 'driver_update_info' %}" class="btn btn-info" role="button">Update driver profile</a>
+<a href="{% url 'driver_update_info' %}" class="btn btn-info" role="button" style="margin-left: 625px">Update Driver Profile</a>
 {% endif %}
 {% endblock %}
