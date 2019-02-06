@@ -6,9 +6,12 @@
 <form method="POST" action="{% url 'search_ride' %}">
     {% csrf_token %}
     <input type="hidden" name="search_as" value="driver">
-    <center><button type="submit" class="btn btn-primary col-md-4">Search as a driver</button></center>
+    <button type="submit" class="btn btn-primary col-md-2" style="margin-left: 60px;">Search as a Driver</button>
 </form>
 {% endif %}
+<br>
+<br>
+
 <form method="POST" action="{% url 'search_ride' %}" style="margin: 0px 20px 10px 50px">
     {% csrf_token %}
     <input type="hidden" name="search_as" value="sharer">

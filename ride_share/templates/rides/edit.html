@@ -137,7 +137,7 @@
                 </label>
             </div>
         </div>
-    <button type="submit" class="btn btn-secondary">Update the ride</button>
+    <button type="submit" class="btn btn-secondary">Update the Ride</button>
 </form>
 </div>
 {% elif edit_as == 'driver' and ride.ride_status == 'confirm' %}
@@ -151,8 +151,8 @@
         {% csrf_token %}
         <div class="form-row">
             <div class="form-group col-md-2">
-                <label for="number_of_passengers">Number of passengers</label>
-                <input type="number" class="form-control" name="number_of_passengers" id="number_of_passengers" placeholder="Number of passengers"
+                <label for="number_of_passengers" style="margin-left: 20px; "> <bold>Number of Passengers</bold></label>
+                <input type="number" style="margin-left: 20px;" class="form-control" name="number_of_passengers" id="number_of_passengers" placeholder="Number of passengers"
                 {% if passenger_number_from_sharer %}
                 value="{{ passenger_number_from_sharer }}" 
                 {% endif %}
@@ -161,9 +161,9 @@
             </div>
         </div>
         {% if edit_as == 'sharer '%}
-            <button type="submit" class="btn btn-secondary col-md-12">Update your share request</button>
+            <button type="submit" class="btn btn-secondary col-md-12">Update your Share Request</button>
         {% else %}
-            <button type="submit" class="btn btn-secondary col-md-12">Join the ride</button>
+            <button type="submit" class="btn btn-secondary col-md-2" style="margin-left: 20px; margin-bottom: 30px;">Join the Ride</button>
         {% endif %}
     </form>
     {% endif %}

@@ -1,20 +1,24 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<a href="{% url 'create_ride' %}" class="btn btn-info" role="button">Request a Ride</a>
-<a href="{% url 'search_ride' %}" class="btn btn-success" role="button">Search</a>
-<h1>Search results</h1>
+<div style="margin-top: 100px; margin-bottom: 20px">
+<center><a href="{% url 'create_ride' %}" class="btn btn-info" role="button">Request a Ride</a> </center>
+<br>
+<center><a href="{% url 'search_ride' %}" class="btn btn-success" role="button">Search</a></center>
+</div>
+<center><h2 style ="text-decoration: underline;"">Search Results</h2></center>
+<br>
 {% if search_as_driver %}
     {% if rides %}
-    <table class="table">
+    <table class="table" style ="margin: 0px 10px 0px 0px; border: 5px solid black; width: 95%;">
         <thead class="thead-light">
             <tr>
-                <th scope="col">id</th>
-                <th scope="col">destination</th>
-                <th scope="col">required arrival time</th>
-                <th scope="col">passenger number(include sharers')</th>
-                <th scope="col">status</th>
-                <th scope="col">action</th>
+                <th scope="col">ID</th>
+                <th scope="col">Destination</th>
+                <th scope="col">Required Arrival Time</th>
+                <th scope="col">Total Passengers</th>
+                <th scope="col">Status</th>
+                <th scope="col">Action</th>
             </tr>
         </thead>
         <tbody>
@@ -38,21 +42,21 @@
         </tbody>
     </table>
     {% else %}
-    <p>You don't have anything to display here</p>
+    <p style="margin-left:100px;">Nothing to display.</p>
     {% endif %}
 {% endif %}
 
 {% if search_as_sharer %}
 {% if rides %}
-<table class="table">
+<table class="table" style ="margin: 0px 10px 0px 0px; border: 5px solid black; width: 95%;">
     <thead class="thead-light">
         <tr>
-            <th scope="col">id</th>
-            <th scope="col">destination</th>
-            <th scope="col">required arrival time</th>
-            <th scope="col">passenger number(include sharers')</th>
-            <th scope="col">status</th>
-            <th scope="col">action</th>
+            <th scope="col">ID</th>
+            <th scope="col">Destination</th>
+            <th scope="col">Required Arrival Time</th>
+            <th scope="col">Total Passengers</th>
+            <th scope="col">Status</th>
+            <th scope="col">Action</th>
         </tr>
     </thead>
     <tbody>
@@ -71,7 +75,7 @@
     </tbody>
 </table>
 {% else %}
-<p>You don't have anything to display here</p>
+<p style="margin-left:100px;">Nothing to display.</p>
 {% endif %}
 {% endif %}
 
