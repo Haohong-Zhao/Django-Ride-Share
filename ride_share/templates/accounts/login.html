@@ -16,12 +16,12 @@
                         <form action="{% url 'login' %}" method="POST">
                             {% csrf_token %}
                             <div class="form-group">
-                                <label for="username">Username</label>
+                                <label for="username" style="font: red;">Username</label>
                                 <input type="text" name="username" class="form-control" required>
                             </div>
 
                             <div class="form-group">
-                                <label for="password2">Password</label>
+                                <label for="password2" style="font:red;">Password</label>
                                 <input type="password" name="password" class="form-control" required>
                             </div>
 
