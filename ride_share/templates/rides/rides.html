@@ -118,12 +118,13 @@
                 <td>{{ ride.ride_status }}</td>
                 {% if ride.ride_status == 'confirm' %}
                 <td>
-                    <a href="{% url 'ride' ride.id %}" class="btn btn-info" role="button">View</a>
-                    <form method="POST" action="{% url 'complete_ride' ride.id %}">
+                     <form method="POST" action="{% url 'complete_ride' ride.id %}">
                         {% csrf_token %}
                         <input type="hidden" />
-                        <input type="submit" class="btn btn-secondary" value="Complete" />
+                        <input type="submit" style="width:60%;" class="btn btn-secondary" value="Complete"/>
                     </form>
+                    <a href="{% url 'ride' ride.id %}" class="btn btn-info" role="button" style="width:60%;">View</a>
+                   
                 </td>
                 {% endif %}
             </tr>
