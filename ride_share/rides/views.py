@@ -77,6 +77,9 @@ def search(request):
             driver_special_vehicle_info = user.driverProfile.special_vehicle_info
             driver_maximum_passengers = user.driverProfile.maximum_passengers
 
+
+            print('What is driver\'s vehicle:', driver_vehicle_type)
+
             rides = Ride.objects.order_by('-id').filter(
                 Q(ride_status='open'),
                 Q(requested_vehicle_type='') | Q(requested_vehicle_type=driver_vehicle_type),
@@ -84,6 +87,11 @@ def search(request):
                 Q(passenger_number_in_total__lte=driver_maximum_passengers),
                 ~Q(owner_id=user.id) & ~Q(sharers__id=user.id)
             )
+
+            for ride in rides:
+            	print(ride.requested_vehicle_type==driver_vehicle_type)
+
+            print('How many rides:', len(rides))
             context = {
                 'rides': rides,
                 'search_as_driver': True,
