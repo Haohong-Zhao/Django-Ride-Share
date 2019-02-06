@@ -82,6 +82,7 @@ def search(request):
                 Q(requested_vehicle_type='') | Q(requested_vehicle_type=driver_vehicle_type),
                 Q(special_request='') | Q(special_request=driver_special_vehicle_info),
                 Q(passenger_number_in_total__lte=driver_maximum_passengers),
+                ~Q(owner_id=user.id) & ~Q(sharers__id=user.id)
             )
             context = {
                 'rides': rides,
@@ -90,6 +91,8 @@ def search(request):
             return render(request, 'rides/search_results.html', context)
         # search as a sharer
         else:
+            user = get_object_or_404(User, id=request.user.id)
+            
             destination = request.POST['destination']
             number_of_passengers = int(request.POST['number_of_passengers'])
             earliest_arrival_time = str_to_datetime(
@@ -105,7 +108,8 @@ def search(request):
                 Q(passenger_number_in_total__lte=number_of_passengers),
                 Q(destination=destination),
                 Q(required_arrival_time__gte=earliest_arrival_time) & Q(
-                    required_arrival_time__lte=latest_arrival_time)
+                    required_arrival_time__lte=latest_arrival_time),
+                ~Q(owner_id=user.id) & ~Q(sharers__id=user.id) & ~Q(driver_id=user.id),
             )
 
             context = {
