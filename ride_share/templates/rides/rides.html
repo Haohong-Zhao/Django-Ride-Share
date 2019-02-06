@@ -101,6 +101,7 @@
                 <th scope="col">Driver</th>
                 <th scope="col">Status</th>
                 <th scope="col">Action</th>
+                <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
@@ -117,15 +118,16 @@
                 </td>
                 <td>{{ ride.ride_status }}</td>
                 {% if ride.ride_status == 'confirm' %}
-                <td>
-                     <form method="POST" action="{% url 'complete_ride' ride.id %}">
-                        {% csrf_token %}
-                        <input type="hidden" />
-                        <input type="submit" style="width:60%;" class="btn btn-secondary" value="Complete"/>
-                    </form>
-                    <a href="{% url 'ride' ride.id %}" class="btn btn-info" role="button" style="width:60%;">View</a>
-                   
-                </td>
+                    <td>
+                        <a href="{% url 'ride' ride.id %}" class="btn btn-info" role="button" style="width:60%;">View</a>
+                    </td>
+                    <td>
+                        <form method="POST" action="{% url 'complete_ride' ride.id %}">
+                            {% csrf_token %}
+                            <input type="hidden" />
+                            <input type="submit" style="width:50%;" class="btn btn-secondary" value="Complete"/>
+                        </form>
+                    </td>
                 {% endif %}
             </tr>
             {% endfor %}
